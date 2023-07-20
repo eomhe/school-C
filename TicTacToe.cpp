@@ -18,16 +18,16 @@ char title[5][60] = {
 	{"  #   ##### #####    #   #   # #####    #    ###  #####"},
 };
 
-//¤² : ¼±  ¤±:¡Û  ¤§:¡¿ 
+//ä»† : æ‘¹  ä»ƒ:âˆž  ä¹‹:â–¼ 
 char board[7][15] = {
     //0123456789012345678901234567890123456789012345678901234567890123456789
-	{"¦£¦¡¦¨¦¡¦¨¦¡¦¤"},
-	{"¦¢  ¦¢  ¦¢  ¦¢"},
-	{"¦§¦¡¦«¦¡¦«¦¡¦©"},
-	{"¦¢  ¦¢  ¦¢  ¦¢"},
-	{"¦§¦¡¦«¦¡¦«¦¡¦©"},
-	{"¦¢  ¦¢  ¦¢  ¦¢"},
-	{"¦¦¦¡¦ª¦¡¦ª¦¡¦¥"},
+	{"å¿™å¼æˆå¼æˆå¼å¿–"},
+	{"å¼›  å¼›  å¼›  å¼›"},
+	{"æˆå¼æ‰˜å¼æ‰˜å¼æ‰£"},
+	{"å¼›  å¼›  å¼›  å¼›"},
+	{"æˆå¼æ‰˜å¼æ‰˜å¼æ‰£"},
+	{"å¼›  å¼›  å¼›  å¼›"},
+	{"æˆŒå¼æ‰›å¼æ‰›å¼æˆŽ"},
 };
 int map[3][3] = { {9,9,9,}, {9,9,9}, {9,9,9}};
 int mapX, mapY;
@@ -43,17 +43,17 @@ int dispMap(){
 void check(){
 	
 	if(map[0][0]+map[0][1]+map[0][2]+map[1][0]+map[1][1]+map[1][2]+map[2][0]+map[2][1]+map[2][2]<=9){
-		gotoXY(30,18); printf("¡¿,¡Ûdraw");
+		gotoXY(30,18); printf("â–¼,âˆždraw");
 	}
 	for(int y = 0; y < 3; y++){
 		if(map[y][0] + map[y][1] + map[y][2] == 3){
-			gotoXY(30,18); printf("¡¿ win!,¡Û lose");
+			gotoXY(30,18); printf("â–¼ win!,âˆž lose");
 			Sleep(1000);
 			exit(0);
 			//X win
 		}	
 		if(map[y][0] + map[y][1] + map[y][2] == 0){
-			gotoXY(30,18); printf("¡Û win!,¡¿ lose");
+			gotoXY(30,18); printf("âˆž win!,â–¼ lose");
 			Sleep(1000);
 			exit(0);
 			//O win
@@ -61,35 +61,35 @@ void check(){
 	}
 	for(int x = 0; x < 3; x++){
 		if(map[0][x] + map[1][x] + map[2][x] == 3){
-			gotoXY(30,18); printf("¡¿ win!,¡Û lose");
+			gotoXY(30,18); printf("â–¼ win!,âˆž lose");
 			Sleep(1000);
 			exit(0);
 			//X win
 		}
 		if(map[0][x] + map[1][x] + map[2][x] == 0){
-			gotoXY(30,18); printf("¡Û win!,¡¿ lose");
+			gotoXY(30,18); printf("âˆž win!,â–¼ lose");
 			Sleep(1000);
 			exit(0);
 			//O win
 		}
 	}
 	if(map[0][0]+map[1][1]+map[2][2] == 0) {
-		gotoXY(30,18); printf("¡Û win!,¡¿ lose");
+		gotoXY(30,18); printf("âˆž win!,â–¼ lose");
 		Sleep(1000);
 		exit(0);
 	}
 	if(map[0][0]+map[1][1]+map[2][2] == 3) {
-		gotoXY(30,18); printf("¡¿ win!,¡Û lose");
+		gotoXY(30,18); printf("â–¼ win!,âˆž lose");
 		Sleep(1000);
 		exit(0);
 	}
 	if(map[0][2]+map[1][1]+map[2][0] == 0) {
-		gotoXY(30,18); printf("¡Û win!,¡¿ lose");
+		gotoXY(30,18); printf("âˆž win!,â–¼ lose");
 		Sleep(1000);
 		exit(0);
 	}
 	if(map[0][2]+map[1][1]+map[2][0] == 3) {
-		gotoXY(30,18); printf("¡¿ win!,¡Û lose");
+		gotoXY(30,18); printf("â–¼ win!,âˆž lose");
 		Sleep(1000);
 		exit(0);
 	}
@@ -102,7 +102,7 @@ void com(){
 		y = rand() % 3;
 	} while(map[y][x] != 9);
 	map[y][x] = 1;
-	gotoXY((boardX+2)+x*4, boardY+1+y*2); puts("¡¿");
+	gotoXY((boardX+2)+x*4, boardY+1+y*2); puts("â–¼");
 	gotoXY((boardX+2)+x*4, boardY+1+y*2);
 	status = status * -1;
 }
@@ -163,25 +163,25 @@ int main() {
 				if(map[mapY][mapX] == 9){
 					if(status == 1){
 						map[mapY][mapX] = 0;
-						puts("¡Û");
+						puts("âˆž");
 					}
 					else{
 						map[mapY][mapX] = 1;
-						puts("¡¿");
+						puts("â–¼");
 					}
 					status = status * -1;
 					gotoXY(playerX, playerY);
-					//check();
-					//com();
+					check();
+					com();
 					check();
 				}
 				else{
 					if(map[mapY][mapX] == 0){
-						setColor(14, 4); gotoXY(playerX, playerY); printf("¡Û"); //puts("¡Û"); °¡´É 
+						setColor(14, 4); gotoXY(playerX, playerY); printf("âˆž"); //puts("âˆž"); é™›æ£Ÿ 
 						Sleep(100);
 						setColor(14, 4); gotoXY(playerX, playerY); printf(" ");
 						Sleep(100);
-						setColor(14, 4); gotoXY(playerX, playerY); printf("¡Û");
+						setColor(14, 4); gotoXY(playerX, playerY); printf("âˆž");
 						Sleep(100);
 						gotoXY(playerX, playerY);
 					}
